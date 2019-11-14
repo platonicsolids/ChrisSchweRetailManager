@@ -33,7 +33,7 @@
         </TextBlock>
         <PasswordBox x:Name="Password" Grid.Row="2" Grid.Column="2" MinWidth="200" MaxWidth="200" Margin="0 0 0 10"/>
         <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
-                x:Name="loginButton" Margin="0 5 0 0" Padding="10 5">
+                x:Name="Login" Margin="0 5 0 0" Padding="10 5">
             Login
         </Button>
     </Grid>
