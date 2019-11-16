@@ -1,31 +1,39 @@
 ﻿using Caliburn.Micro;
+using CSRMDesktopUI.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CSRMDesktopUI.ViewModels
 {
     public class LoginViewModel : Screen
     {
-        private string _userName = "";
-        private string _password = "";
+        private string _userName;
+        private string _password;
+        private IAPIHelpers _APIHelper;
+
+        public LoginViewModel(IAPIHelpers apihelper)
+        {
+            _APIHelper = apihelper;
+        }
         public string UserName
         {
             get { return _userName; }
-            set { _userName = value;
+            set
+            {
+                _userName = value;
                 NotifyOfPropertyChange(() => UserName);
                 NotifyOfPropertyChange(() => CanLogIn);
             }
-        }       
-        public  string Password
+        }
+        public string Password
         {
             get { return _password; }
-            set { _password = value;
+            set
+            {
+                _password = value;
                 NotifyOfPropertyChange(() => Password);
-                NotifyOfPropertyChange(() => CanLogIn); 
-            }                
+                NotifyOfPropertyChange(() => CanLogIn);
+            }
         }
 
         public bool CanLogIn
@@ -33,7 +41,7 @@ namespace CSRMDesktopUI.ViewModels
             get
             {
                 bool output = false;
-                if (UserName.Length > 6 && Password.Length > 6)
+                if (UserName?.Length > 6 && Password?.Length > 6)
                 {
                     output = true;
                 }
@@ -41,12 +49,19 @@ namespace CSRMDesktopUI.ViewModels
             }
         }
 
-        public void LogIn(string username, string password)
+        public async Task LogIn()
         {
+            try
+            {
+                var result = await _APIHelper.Authenticate(UserName, Password);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
 
         }
-
-
     }
-    }
+}
 

@@ -27,7 +27,8 @@ namespace CSRMDesktopUI
             _container.Instance(_container);
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IAPIHelpers, APIHelpers>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
